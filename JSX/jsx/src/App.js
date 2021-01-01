@@ -1,15 +1,10 @@
 import React from 'react'; 
 import './App.css'
-
+//HTML에서는 css클래스를 사용할 때 class 속성 사용
+//JSX에서는 className으로 설정해야함.
 function App() {
   const name = '리액트';
   
-  return (<div style = {{ 
-    backgroundColor: 'black',
-    color: 'violet',
-    fontSize: '48px',
-    fontWeight: 'bold',
-    paddig: 16
-  }}>{name}</div>);
+  return <div className= "react">{name}</div>;
 }                       
 export default App;
