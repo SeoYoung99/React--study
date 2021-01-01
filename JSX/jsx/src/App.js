@@ -2,9 +2,15 @@ import React from 'react';
 import './App.css'
 
 function App() {
-  const name = undefined; 
-   // return name; 함수에서 undefined만 반환하는 상황은 X
-   // return name || '값이 undefined입니다.'; undefined 일때 사용할 값을 지정
-   return <div>{name || 'name값이 undefined입니다.'}</div>
+  const name = '리액트';
+  const style = { 
+    //background-color는 backgroundColor와 같이 카멜 표기법으로 작성
+    backgroundColor: 'black',
+    color: 'aqua',
+    fontSize: '48px',
+    fontWeight: 'bold',
+    paddig: 16
+  }; //DOM요소에 스타일링을 적용할때는 '객체형태'로!!
+  return <div style = {style}>{name}</div>;
 }                       
 export default App;
