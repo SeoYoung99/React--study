@@ -7,13 +7,15 @@ class Counter extends Component {
     //현재 컴포넌트가 상속받고 있는 리액트의 Component클래스가 지닌 생성자함수를 호출
     this.state = {
       number: 0, //state의 초기값 설정, state는 객체 형식!
+      fixedNumber: 0,
     };
   }
   render() {
-    const { number } = this.state; //state를 조회
+    const { number, fixedNumber } = this.state; //state를 조회
     return (
       <div>
         <h1>{number}</h1>
+        <h2>바뀌지 않는 값: {fixedNumber}</h2>
         <button
           onClick={() => {
             //onClick 은 버튼의props
