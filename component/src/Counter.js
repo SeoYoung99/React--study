@@ -1,15 +1,6 @@
 import React, { Component } from "react";
 
 class Counter extends Component {
-  /* constructor(props) {
-    //state를 설정하는 constructor 메서드
-    super(props); //반드시 호출해야함
-    //현재 컴포넌트가 상속받고 있는 리액트의 Component클래스가 지닌 생성자함수를 호출
-    this.state = {
-      number: 0, //state의 초기값 설정, state는 객체 형식!
-      fixedNumber: 0,
-    }; 
-  }*/
   state = {
     number: 0,
     fixedNumber: 0,
@@ -25,8 +16,17 @@ class Counter extends Component {
           onClick={() => {
             //onClick 은 버튼의props
             //onClick을 통해 버튼이 클릭되었을 때 호출할 함수를 지정
-            this.setState({ number: number + 1 });
-            //setState를 사용해서 state에 새로운 값을 넣음
+
+            this.setState((prevState) => {
+              //동기적으로 업데이트를 하고 싶으면 객체 대신 함수 인자를 전달!!
+              //setState를 사용해서 state에 새로운 값을 넣음
+              return {
+                number: prevState.number + 1,
+              };
+            });
+            this.setState((prevState) => ({
+              number: prevState.number + 1,
+            })); //함수에서 바로 객체를 반환
           }}
         >
           +1
