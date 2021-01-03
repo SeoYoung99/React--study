@@ -1,7 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
+//필수 props를 지정하거나 props의 타입을 지정할 때 사용
 
-const MyComponent = (props) => {
-  const { name, children } = props; //props라고 선언 (비구조화 할당 문법)
+const MyComponent = ({ name, children }) => {
   return (
     <div>
       안녕하세요, 제 이름은 {name} 입니다. <br />
@@ -13,4 +14,9 @@ const MyComponent = (props) => {
 MyComponent.defaultProps = {
   name: "기본이름",
 };
+
+MyComponent.propTypes = {
+  name: PropTypes.string,
+};
+
 export default MyComponent;
