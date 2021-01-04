@@ -1,14 +1,28 @@
 import React, { useState } from "react";
 
 const EventPractice = () => {
-  const [username, setUsername] = useState("");
-  const [message, setMessage] = useState("");
-  const onChangeUsername = (e) => setUsername(e.target.value);
-  const onChangeMessage = (e) => setMessage(e.target.value);
+  //함수형 컴포넌트
+  const [form, setForm] = useState({
+    username: "",
+    message: "",
+  });
+
+  const { username, message } = form; //form 객체
+
+  const onChange = (e) => {
+    const nextForm = {
+      ...form, //기존의 form 내용을 이 자리에 복사한 뒤
+      [e.target.name]: e.target.value, // 원하는 값을 덮어 씌우기 (key값은 name이 가리키는 값)
+    };
+    setForm(nextForm); // 위에서 선언한 객체를 인자로 setForm함수 실행
+  };
+
   const onClick = () => {
     alert(username + ": " + message);
-    setUsername("");
-    setMessage("");
+    setForm({
+      username: "",
+      message: "",
+    });
   };
 
   const onKeyPress = (e) => {
@@ -24,16 +38,16 @@ const EventPractice = () => {
         type="text"
         name="username"
         placeholder="사용자명"
-        value={username} //input의 value = state에 있는 값
-        onChange={onChangeUsername}
+        value={username} //객체 전달
+        onChange={onChange} //name = username이므로 username = 입력값, nextForm을 받은 setForm실행
       />
       <input
         type="text"
         name="message"
         placeholder="메시지를 입력하세요."
-        value={message} //input의 value = state에 있는 값
-        onChange={onChangeMessage}
-        onKeyPress={onKeyPress} //onKeyPress 이벤트 핸들링
+        value={message}
+        onChange={onChange} //name = message이므로 message = 입력값, nextForm을 받은 setForm실행
+        onKeyPress={onKeyPress}
       />
       <button onClick={onClick}>확인</button>
     </div>
