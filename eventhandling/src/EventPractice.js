@@ -23,6 +23,13 @@ class EventPractice extends Component {
     });
   };
 
+  handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      //Enter가 눌리면
+      this.handleClick(); //메소드 실행
+    }
+  };
+
   render() {
     return (
       <div>
@@ -40,6 +47,7 @@ class EventPractice extends Component {
           placeholder="메시지를 입력하세요."
           value={this.state.mesage} //input의 value = state에 있는 값
           onChange={this.handleChange}
+          onKeyPress={this.handleClick} //onKeyPress 이벤트 핸들링
         />
         <button onClick={this.handleClick}>확인</button>
       </div>
