@@ -1,57 +1,43 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
-class EventPractice extends Component {
-  state = {
-    username: "",
-    message: "",
-  }; //constructor없이 초기값 설정
-
-  handleChange = (e) => {
-    //임의메서드
-    this.setState({
-      [e.target.name]: e.target.value,
-      //input의 name을 가리킨다.
-    });
+const EventPractice = () => {
+  const [username, setUsername] = useState("");
+  const [message, setMessage] = useState("");
+  const onChangeUsername = (e) => setUsername(e.target.value);
+  const onChangeMessage = (e) => setMessage(e.target.value);
+  const onClick = () => {
+    alert(username + ": " + message);
+    setUsername("");
+    setMessage("");
   };
 
-  handleClick = () => {
-    //임의메서드
-    alert(this.state.username + ": " + this.state.message);
-    this.setState({
-      username: "",
-      message: "",
-    });
-  };
-
-  handleKeyPress = (e) => {
+  const onKeyPress = (e) => {
     if (e.key === "Enter") {
-      //Enter가 눌리면
-      this.handleClick(); //메소드 실행
+      onClick();
     }
   };
 
-  render() {
-    return (
-      <div>
-        <h1>이벤트연습 - input 여러개</h1>
-        <input
-          type="text"
-          name="username"
-          placeholder="사용자명"
-          value={this.state.username} //input의 value = state에 있는 값
-          onChange={this.handleChange}
-        />
-        <input
-          type="text"
-          name="message"
-          placeholder="메시지를 입력하세요."
-          value={this.state.mesage} //input의 value = state에 있는 값
-          onChange={this.handleChange}
-          onKeyPress={this.handleClick} //onKeyPress 이벤트 핸들링
-        />
-        <button onClick={this.handleClick}>확인</button>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <h1>이벤트연습 - 함수형 컴포넌트</h1>
+      <input
+        type="text"
+        name="username"
+        placeholder="사용자명"
+        value={username} //input의 value = state에 있는 값
+        onChange={onChangeUsername}
+      />
+      <input
+        type="text"
+        name="message"
+        placeholder="메시지를 입력하세요."
+        value={message} //input의 value = state에 있는 값
+        onChange={onChangeMessage}
+        onKeyPress={onKeyPress} //onKeyPress 이벤트 핸들링
+      />
+      <button onClick={onClick}>확인</button>
+    </div>
+  );
+};
+
 export default EventPractice;
