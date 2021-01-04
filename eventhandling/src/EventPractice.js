@@ -2,39 +2,43 @@ import React, { Component } from "react";
 
 class EventPractice extends Component {
   state = {
-    message: "", //constructor없이 초기값 설정
+    username: "",
+    message: "",
+  }; //constructor없이 초기값 설정
+
+  handleChange = (e) => {
+    //임의메서드
+    this.setState({
+      [e.target.name]: e.target.value,
+      //input의 name을 가리킨다.
+    });
   };
 
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this); // 임의메서드가 이벤트로 등록되는 과정에서 메서드와 this가 끊어지므로
-    this.handleClick = this.handleClick.bind(this); // 메서드를 this에 바인딩
-  }
-
-  handleChange(e) {
+  handleClick = () => {
     //임의메서드
+    alert(this.state.username + ": " + this.state.message);
     this.setState({
-      message: e.target.value,
-    });
-  }
-
-  handleClick(e) {
-    //임의메서드
-    alert(this.state.message);
-    this.setState({
+      username: "",
       message: "",
     });
-  }
+  };
+
   render() {
     return (
       <div>
-        <h1>이벤트연습</h1>
+        <h1>이벤트연습 - input 여러개</h1>
+        <input
+          type="text"
+          name="username"
+          placeholder="사용자명"
+          value={this.state.username} //input의 value = state에 있는 값
+          onChange={this.handleChange}
+        />
         <input
           type="text"
           name="message"
-          placeholder="아무거나 입력해보세요"
-          value={this.state.message} //input의 value = state에 있는 값
-          //이거 왜 한거임...?
+          placeholder="메시지를 입력하세요."
+          value={this.state.mesage} //input의 value = state에 있는 값
           onChange={this.handleChange}
         />
         <button onClick={this.handleClick}>확인</button>
