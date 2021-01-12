@@ -5,8 +5,14 @@ const Info = () => {
   const [nickname, setNickname] = useState("");
 
   useEffect(() => {
+    console.log("effect");
     console.log(name);
-  }, [name]); //두번째 파라미터로 전달되는 배열에 검사되는 값을 넣어준다.
+    return () => {
+      //뒷정리함수
+      console.log("cleanup");
+      console.log(name);
+    };
+  });
 
   const onChangeName = (e) => {
     setName(e.target.value);
