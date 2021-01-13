@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 
 const getAverage = (numbers) => {
   //평균을 계산하는 함수
@@ -13,15 +13,18 @@ const Average = () => {
   const [number, setNumber] = useState("");
   //list, number (state 2개)
 
-  const onChange = (e) => {
-    setNumber(e.target.value); //input들어오면 입력값을 number에 업데이트
-  };
-  const onInsert = (e) => {
+  const onChange = useCallback((e) => {
+    setNumber(e.target.value);
+  }, []); //컴포넌트가 처음 렌더링될 때만 함수 생성(두번째 파라미터로 비어있는 배열을 넣어줌)
+  //첫번째 파라미터: 생성하고 싶은 함수, 두번째 파라미터: 어떤값이 바뀌었을 때 생성할 건지 배열에 넣어줌
+
+  const onInsert = useCallback(() => {
     //버튼 핸들링 메서드
     const nextList = list.concat(parseInt(number)); //number를 추가한 새 배열 만들어서 list 업데이트
     setList(nextList);
     setNumber(""); //number는 초기화
-  };
+  }, [number, list]); //number 또는 list가 바뀌었을 때만 함수생성
+
   const avg = useMemo(() => getAverage(list), [list]);
   // list 값이 바뀌었을 때만 getAverage함수를 호출, 바뀌지 않으면 이전에 연산했던 결과( [list] )를 다시 사용
   return (
