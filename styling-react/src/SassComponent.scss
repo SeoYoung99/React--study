@@ -1,4 +1,4 @@
-//변수 사용하기
+/*//변수 사용하기
 $red: #fa5252;
 $orange: #fd7e14;
 $yellow: #fcc419;
@@ -13,6 +13,8 @@ $violet: #7950f2;
   width: $caculated;
   height: $caculated;
 }
+*/
+@import "./styles/util";
 
 .SassComponent {
   display: flex;
