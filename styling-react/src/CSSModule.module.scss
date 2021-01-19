@@ -5,13 +5,13 @@
   color: white;
   font-size: 2rem;
 }
-.inverted {
+&.inverted {
   color: black;
   background: white;
   border: 1px solid black;
 }
 /*글로벌 css를 작성할 때*/
-:global .something {
+:global {
   font-weight: 800;
   color: aqua;
 }
