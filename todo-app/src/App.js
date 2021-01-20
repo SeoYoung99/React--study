@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import TodoTemplate from './components/TodoTemplate';
 import TodoInsert from './components/TodoInsert';
 import TodoList from './components/TodoList';
 
 const App = () => {
   const [todos, setTodos] = useState([
-    //초기값으로 객체 배열이 들어감
+    //초기값으로 객체 배열이 들어감, todos는 객체 배열!!
     {
       id: 1,
       text: '리액트의 기초 알아보기', //내용
@@ -22,9 +22,28 @@ const App = () => {
       checked: false,
     },
   ]);
+
+  //고윳값으로 사용될 id
+  //ref를 사용하여 변수 담기
+  const nextId = useRef(4);
+
+  const onInsert = useCallback(
+    (text) => {
+      //???
+      const todo = {
+        id: nextId.current,
+        text,
+        checked: false,
+      };
+      setTodos(todos.concat(todo)); //todos배열에 위에서 만들어준 todo객체를 추가해준다
+      nextId.current += 1; //id+1
+    },
+    [todos], //todos가 바뀔때만 렌더링
+  );
+
   return (
     <TodoTemplate>
-      <TodoInsert />
+      <TodoInsert onInsert={onInsert} />
       <TodoList todos={todos} /> {/* props 넣어주기 */}
     </TodoTemplate>
   );
