@@ -7,8 +7,8 @@ import {
 import cn from 'classnames'; //조건부 스타일링을 위해 classnames사용
 import './TodoListItem.scss'; //스타일 받아오기
 
-const TodoListItem = ({ todo }) => {
-  const { text, checked } = todo; //객체
+const TodoListItem = ({ todo, onRemove }) => {
+  const { id, text, checked } = todo; //객체
   return (
     <div className="TodoListItem">
       <div className={cn('checkbox', { checked })}>
@@ -17,7 +17,10 @@ const TodoListItem = ({ todo }) => {
         {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
         <div className="text">{text}</div>
       </div>
-      <div className="remove">
+      <div
+        className="remove"
+        onClick={() => onRemove(id)} //아이콘을 누르면 onRemove함수 호출
+      >
         <MdRemoveCircleOutline />
       </div>
     </div>
