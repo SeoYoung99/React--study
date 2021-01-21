@@ -29,29 +29,23 @@ const App = () => {
         text,
         checked: false,
       };
-      setTodos(todos.concat(todo)); //todos배열에 위에서 만들어준 todo객체를 추가해준다
+      setTodos((todos) => todos.concat(todo)); //todos배열에 위에서 만들어준 todo객체를 추가해준다
       nextId.current += 1; //id+1
     },
-    [todos], //todos가 바뀔때만 렌더링
+    [], //todos가 바뀔때만 렌더링
   );
 
-  const onRemove = useCallback(
-    (id) => {
-      setTodos(todos.filter((todo) => todo.id !== id));
-    },
-    [todos],
-  );
+  const onRemove = useCallback((id) => {
+    setTodos((todos) => todos.filter((todo) => todo.id !== id));
+  }, []);
 
-  const onToggle = useCallback(
-    (id) => {
-      setTodos(
-        todos.map((
-          todo, //특정 id를 가지고 있는 객체의 checked값을 반전시켜줌
-        ) => (todo.id === id ? { ...todo, checked: !todo.checked } : todo)),
-      );
-    },
-    [todos],
-  );
+  const onToggle = useCallback((id) => {
+    setTodos((todos) =>
+      todos.map((
+        todo, //특정 id를 가지고 있는 객체의 checked값을 반전시켜줌
+      ) => (todo.id === id ? { ...todo, checked: !todo.checked } : todo)),
+    );
+  }, []);
 
   return (
     <TodoTemplate>
