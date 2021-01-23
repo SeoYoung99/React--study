@@ -6,10 +6,7 @@ import { useCallback } from '../../node_modules/react/cjs/react.development';
 
 const TodoList = ({ todos, onRemove, onToggle }) => {
   const rowRender = useCallback(
-    //리스트 컴포넌트에서 각 TodoItem을 렌더링할 때 사용,
-    //이 함수를 List컴포넌트의 props로 설정해야한다
     ({ index, key, style }) => {
-      //파라미터에 객체타입으로 받아와서 사용
       const todo = todos[index];
       return (
         <TodoListItem
