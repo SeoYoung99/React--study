@@ -1,4 +1,4 @@
-import React, { useReducer, useRef, useCallback } from 'react';
+import React, { useEffect, useReducer, useRef, useCallback } from 'react';
 import TodoTemplate from './components/TodoTemplate';
 import TodoInsert from './components/TodoInsert';
 import TodoList from './components/TodoList';
@@ -57,6 +57,18 @@ const App = () => {
   const onToggle = useCallback((id) => {
     dispatch({ type: 'TOGGLE', id });
   }, []);
+
+  useEffect(() => {
+    var done = 0;
+    for (var i = 0; i < todos.length; i++) {
+      if (todos[i].checked === true) {
+        done += 1;
+      }
+      if (done === todos.length) {
+        alert('축하합니다!');
+      }
+    }
+  }, [todos]);
 
   return (
     <TodoTemplate>
