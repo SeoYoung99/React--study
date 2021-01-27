@@ -18,7 +18,7 @@ const TodoListItem = ({ todo, onRemove, onToggle, style }) => {
       <div className="TodoListItem">
         <div
           className={cn('checkbox', { checked })}
-          onClick={() => onToggle(id)}
+          onClick={() => onToggle(id)} //클릭되면 onToggle함수 실행 -> checked상태가 반전됨
         >
           {' '}
           {/* checked가 참이어야 checked클래스가 적용된다. */}

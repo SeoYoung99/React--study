@@ -4,6 +4,7 @@ import TodoInsert from './components/TodoInsert';
 import TodoList from './components/TodoList';
 
 function createBulkTodos() {
+  // 기본값들 생성
   const array = [];
   for (let i = 1; i <= 2500; i++) {
     array.push({
@@ -16,6 +17,7 @@ function createBulkTodos() {
 }
 
 function todoReducer(todos, action) {
+  //useReducer에서 쓰는 reducer함수
   switch (action.type) {
     case 'INSERT': //새로추가
       return todos.concat(action.todo);
@@ -31,6 +33,7 @@ function todoReducer(todos, action) {
 }
 const App = () => {
   const [todos, dispatch] = useReducer(todoReducer, undefined, createBulkTodos);
+  //  state  상태감지!                                      초기값으로 만들어 놓은 array = todos
   //기본값에 파라미터로 함수 형태를 넣어주면 컴포넌트가 처음 렌더링될 때만 createBulkTodos함수 실행된다.
 
   //ref를 사용하여 변수 담기
@@ -40,6 +43,7 @@ const App = () => {
     (text) => {
       //???
       const todo = {
+        //새 항목 ( 객체 )
         id: nextId.current,
         text,
         checked: false,
