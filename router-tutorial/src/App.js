@@ -10,21 +10,12 @@ import Home from "./Home";
 const App = () => {
   return (
     <div>
-      <u1>
-        <li>
-          <Link to="/">홈</Link>
-        </li>
-        <li>
-          <Link to="/about">소개</Link>
-        </li>
-      </u1>
-      <hr />
       <Route
         path="/"
         component={Home}
         exact={true} //exact라는 props를 true로 설정
       />
-      <Route path="/about" component={About} />
+      <Route path={["/about", "/info"]} component={About} />
     </div>
   );
 };
