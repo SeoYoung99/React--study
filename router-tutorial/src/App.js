@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+//Route라는 컴포넌트를 사용해서 사용자의 현재 경로에 따라 다른 컴포넌트를 보여준다.
+// <Route path="주소규칙" component={보여 줄 컴포넌트} />
 
-function App() {
+import React from "react";
+import { Route } from "react-router-dom";
+import About from "./About";
+import Home from "./Home";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Route
+        path="/"
+        component={Home}
+        exact={true} //exact라는 props를 true로 설정
+      />
+      <Route path="/about" component={About} />
     </div>
   );
-}
-
+};
 export default App;
