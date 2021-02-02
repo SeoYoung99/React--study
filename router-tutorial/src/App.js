@@ -1,9 +1,5 @@
-//Route라는 컴포넌트를 사용해서 사용자의 현재 경로에 따라 다른 컴포넌트를 보여준다.
-// <Route path="주소규칙" component={보여 줄 컴포넌트} />
-// <Link to='주소'>내용</Link>
-
 import React from "react";
-import { Route, Link } from "react-router-dom";
+import { Route, Link, Switch } from "react-router-dom";
 import About from "./About";
 import Home from "./Home";
 import Profiles from "./Profiles";
@@ -27,10 +23,20 @@ const App = () => {
         </li>
       </ul>
       <hr />
-      <Route path="/" component={Home} exact={true} />
-      <Route path={["/about", "/info"]} component={About} />
-      <Route path="/profiles" component={Profiles} />
-      <Route path="/history" component={HistorySample} />
+      <Switch>
+        <Route path="/" component={Home} exact={true} />
+        <Route path={["/about", "/info"]} component={About} />
+        <Route path="/profiles" component={Profiles} />
+        <Route path="/history" component={HistorySample} />
+        <Route //path를 따로 정의하지 않으면 모든 상황에 렌더링된다.
+          render={({ location }) => (
+            <div>
+              <h2>이 페이지는 존재하지 않습니다.</h2>
+              <p>{location.pathname}</p>
+            </div>
+          )}
+        />
+      </Switch>
     </div>
   );
 };
