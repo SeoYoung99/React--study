@@ -28,9 +28,10 @@ const NewsList = () => {
       setLoading(true);
       try {
         const response = await axios.get(
+          //데이터를 불러와서
           'http://newsapi.org/v2/top-headlines?country=kr&apiKey=66cd214b91f0456ba0db9077554010dd',
         );
-        setArticles(response.data.articles);
+        setArticles(response.data.articles); //articles에 업데이트
       } catch (e) {
         console.log(e);
       }
@@ -45,6 +46,7 @@ const NewsList = () => {
   }
   //아직 articles값이 설정되지 않았을 때
   if (!articles) {
+    //해당값이 현재 null인지 꼭! 검사해야함
     return null;
   }
   //articles값이 유효할 때
