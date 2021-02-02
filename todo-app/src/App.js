@@ -1,15 +1,18 @@
-import React, { useEffect, useReducer, useRef, useCallback } from 'react';
+import React, { useState, useReducer, useRef, useCallback } from 'react';
 import TodoTemplate from './components/TodoTemplate';
 import TodoInsert from './components/TodoInsert';
 import TodoList from './components/TodoList';
+import Image from './components/Images';
+import { MdFavoriteBorder, MdFavorite } from 'react-icons/md'; // {아이콘 이름}
+import './App.css';
 
 function createBulkTodos() {
   // 기본값들 생성
   const array = [];
-  for (let i = 1; i <= 2500; i++) {
+  for (let i = 1; i <= 2; i++) {
     array.push({
       id: i,
-      text: `할 일${i}`,
+      text: `댓글${i}`,
       checked: false,
     });
   }
@@ -33,11 +36,12 @@ function todoReducer(todos, action) {
 }
 const App = () => {
   const [todos, dispatch] = useReducer(todoReducer, undefined, createBulkTodos);
+  const [likes, setLikes] = useState(false);
   //  state  상태감지!                                      초기값으로 만들어 놓은 array = todos
   //기본값에 파라미터로 함수 형태를 넣어주면 컴포넌트가 처음 렌더링될 때만 createBulkTodos함수 실행된다.
 
   //ref를 사용하여 변수 담기
-  const nextId = useRef(2501);
+  const nextId = useRef(3);
 
   const onInsert = useCallback(
     (text) => {
@@ -62,22 +66,33 @@ const App = () => {
     dispatch({ type: 'TOGGLE', id });
   }, []);
 
-  useEffect(() => {
-    var done = 0;
-    for (var i = 0; i < todos.length; i++) {
-      if (todos[i].checked === true) {
-        done += 1;
-      }
-      if (done === todos.length) {
-        alert('축하합니다!');
-      }
-    }
-  }, [todos]);
+  const onlikes = () => {
+    setLikes(!likes);
+  };
 
   return (
     <TodoTemplate>
+      <Image />
+      <button
+        class={likes ? 'yes' : 'no'}
+        style={{ width: 100, height: 50 }}
+        onClick={onlikes}
+      >
+        좋아요
+        {likes ? (
+          <MdFavorite size="20" color="navy" />
+        ) : (
+          <MdFavoriteBorder size="20" />
+        )}
+      </button>
+      <div style={{ fontSize: 18 }}>댓글 {todos.length} </div>
       <TodoInsert onInsert={onInsert} />
-      <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} />{' '}
+      <TodoList
+        todos={todos}
+        likes={likes}
+        onRemove={onRemove}
+        onToggle={onToggle}
+      />{' '}
       {/* props 넣어주기 */}
     </TodoTemplate>
   );
