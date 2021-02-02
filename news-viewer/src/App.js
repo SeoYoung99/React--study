@@ -1,15 +1,10 @@
-import React, { useState, useCallback } from 'react';
-import NewsList from './components/NewsList';
-import Categories from './components/Categories';
+import React from 'react';
+import { Route } from 'react-router-dom';
+import NewsPage from './pages/NewsPage';
+
 const App = () => {
-  const [category, setCategory] = useState('all');
-  const onSelect = useCallback((category) => setCategory(category), []);
-  return (
-    <>
-      <Categories category={category} onSelect={onSelect} />
-      <NewsList category={category} />
-    </>
-  );
+  return <Route path="/:category?" component={NewsPage} />;
+  //category값이 선택적 즉, 있을 수도 있고 없을 수도 있다.
 };
 
 export default App;
