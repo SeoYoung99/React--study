@@ -16,7 +16,7 @@ const NewsLsitBlock = styled.div`
   }
 `;
 
-const NewsList = () => {
+const NewsList = ({ category }) => {
   const [articles, setArticles] = useState(null);
   // articles라는 상태 선언
   const [loading, setLoading] = useState(false);
@@ -27,9 +27,14 @@ const NewsList = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
+        const query = category === 'all' ? '' : `&category=${category}`;
+        //현재 category값이 무엇인지에 따라 요청할 주소가 동적으로 바뀜
+        //category 값이 all이면query 값을 공백으로 설정하고,
+        //all이 아니면 &category=카테고리 형태의 문자열을 만들도록 함
         const response = await axios.get(
           //데이터를 불러와서
-          'http://newsapi.org/v2/top-headlines?country=kr&apiKey=66cd214b91f0456ba0db9077554010dd',
+          `http://newsapi.org/v2/top-headlines?country=kr${query}&apiKey=66cd214b91f0456ba0db9077554010dd`,
+          //그리고 그 문자열을 주소에 포함
         );
         setArticles(response.data.articles); //articles에 업데이트
       } catch (e) {
@@ -38,7 +43,7 @@ const NewsList = () => {
       setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [category]); //category값이 바뀔 때마다 뉴스를 새로 불러와야 하므로 []에 category 넣어줌
 
   //대기 중일 때
   if (loading) {
