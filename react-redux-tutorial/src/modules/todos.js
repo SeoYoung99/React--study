@@ -29,7 +29,7 @@ export const remove = (id) => ({
   id,
 });
 
-//초기 상태 및 리듀서 함수 만들기 (배열에 변화를 줄 때는 배열 내장 함수 사용)
+//초기 상태
 const initialState = {
   input: '',
   todos: [
@@ -45,6 +45,7 @@ const initialState = {
     },
   ],
 };
+// 리듀서 함수 만들기 (배열에 변화를 줄 때는 배열 내장 함수 사용)
 function todos(state = initialState, action) {
   //state: { input: string; todos: { id: number; text: string; done: boolean; } [ ] ; }
   switch (action.type) {
