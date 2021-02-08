@@ -2,6 +2,7 @@ import React from 'react';
 // connect함수 사용
 import { connect } from 'react-redux';
 import Counter from '../components/Counter';
+import { increase, decrease } from '../modules/counter';
 
 const CounterContainer = ({ number, increase, decrease }) => {
   return (
@@ -18,10 +19,11 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   //임시함수
   increase: () => {
-    console.log('increase');
+    //액션 생성함수를 불러와 액션 개체를 만들어 디스패치
+    dispatch(increase());
   },
   decrease: () => {
-    console.log('decrease');
+    dispatch(decrease());
   },
 });
 
