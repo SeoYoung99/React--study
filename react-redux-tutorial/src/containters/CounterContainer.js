@@ -39,8 +39,7 @@ export default connect(
   (state) => ({
     number: state.counter.number,
   }),
-  (dispatch) => ({
-    increase: () => dispatch(increase()),
-    decrease: () => dispatch(decrease()),
-  }),
+  //mapDispatchToProps에 해당하는 파라미터를 액션생성함수로 이루어진 객체 형태로 넣어주면
+  //connect함수가 내부적으로 bindActionCreators작업을 대신해줌
+  { increase, decrease },
 )(CounterContainer);
