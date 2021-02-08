@@ -10,6 +10,8 @@ const CounterContainer = ({ number, increase, decrease }) => {
   );
 };
 
+/* 아래처럼 mapStateToProps와 mapDispatchToProps를 미리 선언해서 사용할 수도 있고
+
 //리덕스 스토어 안의 상태를 컴포넌트의 props로 넘겨줌
 const mapStateToProps = (state) => ({
   number: state.counter.number,
@@ -29,3 +31,16 @@ const mapDispatchToProps = (dispatch) => ({
 
 //connect함수의 타깃 컴포넌트 = CounterContainer를 파라미터로 넣어주면 리덕스와 연동된 컴포넌트 생성
 export default connect(mapStateToProps, mapDispatchToProps)(CounterContainer);
+
+*/
+
+//connect함수 내부에 익명 함수 형태로 선언할 수도 있다.
+export default connect(
+  (state) => ({
+    number: state.counter.number,
+  }),
+  (dispatch) => ({
+    increase: () => dispatch(increase()),
+    decrease: () => dispatch(decrease()),
+  }),
+)(CounterContainer);
