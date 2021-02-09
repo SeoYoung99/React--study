@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 // connect함수 사용
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Counter from '../components/Counter';
 import { increase, decrease } from '../modules/counter';
 
-const CounterContainer = ({ number, increase, decrease }) => {
+const CounterContainer = () => {
+  const number = useSelector((state) => state.counter.number);
+  const dispatch = useDispatch();
+  const onIncrease = useCallback(() => dispatch(increase()), [dispatch]);
+  const onDecrease = useCallback(() => dispatch(decrease()), [dispatch]);
   return (
-    <Counter number={number} onIncrease={increase} onDecrease={decrease} />
+    <Counter number={number} onIncrease={onIncrease} onDecrease={onDecrease} />
   );
 };
 
@@ -35,11 +39,4 @@ export default connect(mapStateToProps, mapDispatchToProps)(CounterContainer);
 */
 
 //connect함수 내부에 익명 함수 형태로 선언할 수도 있다.
-export default connect(
-  (state) => ({
-    number: state.counter.number,
-  }),
-  //mapDispatchToProps에 해당하는 파라미터를 액션생성함수로 이루어진 객체 형태로 넣어주면
-  //connect함수가 내부적으로 bindActionCreators작업을 대신해줌
-  { increase, decrease },
-)(CounterContainer);
+export default CounterContainer;
