@@ -1,17 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+//리덕스 적용하기
+import React from "react";
+import ReactDOM from "react-dom";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import "./index.css";
+import App from "./App";
+import rootReducer from "./modules";
+
+const store = createStore(rootReducer); //루트 리듀서를 이용하여 스토어 생성
 
 ReactDOM.render(
-  <React.StrictMode>
+  //Provider 컴포넌트로 App컴포넌트를 감싸서 리덕스 적용
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </Provider>,
+  document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
