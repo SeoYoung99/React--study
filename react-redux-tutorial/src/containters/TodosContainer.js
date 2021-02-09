@@ -1,3 +1,4 @@
+/* 
 import React from 'react';
 import { connect } from 'react-redux';
 //리덕스 스토어에서 불러옴 (todos 상태안에 있는 값들과 액션 생성 함수)
@@ -39,3 +40,35 @@ export default connect(
     remove,
   },
 )(TodosContainer);
+*/
+
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { changeInput, insert, toggle, remove } from '../modules/todos';
+import Todos from '../components/Todos';
+import useActions from '../lib/useActions';
+
+const TodosContainer = () => {
+  const { input, todos } = useSelector(({ todos }) => ({
+    input: todos.input,
+    todos: todos.todos,
+  }));
+
+  const [onChangeInput, onInsert, onToggle, onRemove] = useActions(
+    [changeInput, insert, toggle, remove],
+    [],
+  );
+
+  return (
+    <Todos
+      input={input}
+      todos={todos}
+      onChangeInput={onChangeInput}
+      onInsert={onInsert}
+      onToggle={onToggle}
+      onRemove={onRemove}
+    />
+  );
+};
+
+export default React.memo(TodosContainer);
