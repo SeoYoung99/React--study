@@ -1,5 +1,6 @@
 import React from 'react';
-import Todos from './components/Todos';
+//import Todos from './components/Todos';
+import TodosContainer from './containters/TodosContainer';
 import CounterContainer from './containters/CounterContainer';
 
 const App = () => {
@@ -7,7 +8,7 @@ const App = () => {
     <div>
       <CounterContainer />
       <hr />
-      <Todos />
+      <TodosContainer />
     </div>
   );
 };
