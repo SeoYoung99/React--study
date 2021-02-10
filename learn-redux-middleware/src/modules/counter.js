@@ -7,6 +7,19 @@ const DECREASE = "counter/DECREASE";
 export const increase = createAction(INCREASE); //액션 생성 함수
 export const decrease = createAction(DECREASE);
 
+//redux-thunk는 액션 생성 함수에서 일반 액션 객체를 반환하는 대신에 함수를 반환한다.
+export const increaseAsync = () => (dispatch) => {
+  //1초 뒤에 increase 함수를 디스패치
+  setTimeout(() => {
+    dispatch(increase());
+  }, 1000);
+};
+export const decreaseAsync = () => (dispatch) => {
+  setTimeout(() => {
+    dispatch(decrease());
+  }, 1000);
+};
+
 const initialState = 0; //초기상태 (꼭 객체일 필요는 없다)
 
 const counter = handleActions(
