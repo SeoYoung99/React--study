@@ -1,34 +1,29 @@
 import logo from "./logo.svg";
 import "./App.css";
-import React, { Component } from "react"; //클래스형 컴포넌트로 전환
+import React, { Suspense, useState } from "react";
 
-class App extends Component {
-  state = {
-    SplitMe: null,
+const SplitMe = React.lazy(() => import("./SplitMe"));
+// 컴포넌트를 렌더링하는 시점에서 비동기적으로 로딩
+
+function App() {
+  const [visible, setVisible] = useState(false);
+  const onClick = () => {
+    setVisible(true);
   };
-  handleClick = async () => {
-    //배누에서 SpliMe 컴포넌트를 불러와 state에 넣어줌
-    const loadModule = await import("./SplitMe");
-    this.setState({
-      SplitMe: loadModule.default,
-    });
-  };
-  render() {
-    const { SplitMe } = this.state;
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p onClick={this.handleClick}>Hello React!</p>
-          {SplitMe && (
-            <SplitMe
-            //SplitMe가 유효하다면 렌더링
-            />
-          )}
-        </header>
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p onClick={onClick}>Hello React!</p>
+        <Suspense
+          fallback={<div>loading...</div>}
+          //코드 스플리팅된 컴포넌트를 로딩, fallback을 통해 로딩이 끝나지 않았을 때 보여줄 UI설정
+        >
+          {visible && <SplitMe />}
+        </Suspense>
+      </header>
+    </div>
+  );
 }
 
 export default App;
