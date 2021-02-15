@@ -20,6 +20,7 @@ const CounterContainer = ({
   );
 };
 export default connect(
+  
   (state) => ({
     // 리덕스 스토어안에 있는 상태
     number: state.counter,
