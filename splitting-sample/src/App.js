@@ -13,6 +13,10 @@ function App() {
   const onClick = () => {
     setVisible(true);
   };
+  const onRightClick = (e) => {
+    e.preventDefault();
+    setVisible(true);
+  };
   const onMouseOver = () => {
     SplitMe.preload(); //컴포넌트 미리 불러오기
   };
@@ -22,6 +26,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p
           onClick={onClick}
+          onContextMenu={onRightClick}
           onMouseOver={onMouseOver}
           //마우스를 올리기만 해도 로딩이 시작
         >
